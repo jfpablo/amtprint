@@ -1,0 +1,197 @@
+<html>	
+<link rel="stylesheet" href="./style.css"></link>
+<head>
+<meta name="mobile-web-app-capable" content="yes"></meta>
+<style>
+body {
+color:black;
+background-color:white;
+background-image:url(./desktop/background.png);
+background-attachment:fixed;
+background-position:center center;
+background-size : 100%;
+margin:0;
+}
+#topbar
+{
+position : fixed;
+height : 20px;
+width : 100%; 
+top : 0px;
+background:whitesmoke;
+background-repeat: no-repeat;
+
+}
+#battery
+{
+right : 0px;
+top : 0px;
+height :20px;
+width : 38.41px;
+position : fixed;
+
+}
+#batteryimg
+{
+height :20px;
+width : 38.41px;
+position : fixed;
+Z-index : 2;
+-webkit-user-drag: none;
+}
+#levelctn
+{
+height: 20px;
+    width: 24px;
+    margin-left: 4px;
+    margin-top: 4px;
+}
+#batterylevel
+{
+height: 10px;
+    background: chartreuse;
+    border-radius: 3px;
+    border: solid 1px chartreuse;
+}
+#time
+{
+display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#leftctnbar
+{
+left : 0px;
+top : 0px;
+height :20px;
+position : fixed;
+}
+#shutdownbtn
+{
+height :20px;
+}
+#container
+{
+padding-top: 20px;
+    width: 100%;
+    height: -webkit-fill-available;
+}
+#dock
+{
+bottom: 0px;
+    position: fixed;
+    height: 10%;
+    left : 9%;
+    width: 80%;
+    background: #83848559;
+    border: 1px solid transparent;
+    border-radius: 8px;
+z-index: 1;
+}
+
+#percentbat
+{
+display: inline-flex;
+    top: 1px;
+    position: fixed;
+    right: 43px;
+}
+#app1img
+{
+height: 100%;
+    width: auto;
+    border: 1px solid transparent;
+    border-radius: 12px;
+}
+#testwindow
+{
+  resize: both;
+  overflow: auto;
+}
+#shutdownwindow
+{
+position: absolute;
+    top: 30%;
+    z-index: 4;
+    left: 30%;
+    width: 600;
+    height: 300;
+border-radius: 8px;
+    border: solid 1px transparent;
+background:#00000082;
+}
+#shutbtn
+{
+width: 60px;
+    height: auto;
+}
+</style>
+</head>
+	
+<body>	
+<div id="topbar">
+<center>
+	<div id="time">00:00</div>
+</center>
+<div id="percentbat"></div>	
+<div id="battery"><img id="batteryimg" title="" src="./system/battery.png"></img>
+<div id="levelctn">
+<div id="batterylevel"></div></div>
+</div>
+	</div>
+
+<div id="container">
+</div>
+
+</body>
+<script>
+document.title="AMTprint";
+</script>
+<script>
+navigator.getBattery().then(function(battery) {
+  console.log(battery.level*100 + "%");
+batterylevel.style.width = battery.level*100 + "%";
+batteryimg.title = battery.level*100 + "%";
+percentbat.innerHTML = battery.level*100 + "%";
+  // ... and any subsequent updates.
+  battery.onlevelchange = function() {
+    console.log(this.level*100 + "%");
+batterylevel.style.width = this.level*100 + "%";
+batteryimg.title = battery.level*100 + "%";
+percentbat.innerHTML = battery.level*100 + "%";
+  };
+});
+</script>
+<script>
+function affichZero(nombre) {
+return nombre < 10 ? '0' + nombre : nombre;
+}
+function dateEtHeure() {
+
+const infos = new Date();
+ 
+document.getElementById('time').innerHTML = ' ' + affichZero(infos.getHours()) + ':' + affichZero(infos.getMinutes());
+}
+window.onload = function() {
+setInterval("dateEtHeure()", 1000);
+};
+</script>
+<script>
+
+function toggleFullScreen() {
+    var doc = window.document;
+    var docEl = doc.documentElement;
+
+    var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen;
+    var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen;
+
+    if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement) {
+      requestFullScreen.call(docEl);
+    }
+    else {
+      cancelFullScreen.call(doc);
+    }
+  }
+
+</script>
+</html>

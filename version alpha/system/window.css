@@ -1,0 +1,29 @@
+#winctn
+{
+width: -webkit-fill-available;
+    height: -webkit-fill-available;
+padding-top: 22px;
+}
+#testwindow
+{
+border : 1px solid transparent;
+border-radius : 8px;
+display: block;
+z-index: 2;
+    position: absolute;
+}
+#titlebar
+{
+position: fixed;
+width: inherit;
+border-top-right-radius: 8px;
+border-top-left-radius: 8px;
+}
+#wintitle
+{
+float:left;
+}
+#winbtn
+{
+float : right;
+}
