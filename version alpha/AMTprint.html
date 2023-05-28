@@ -128,7 +128,7 @@ width: 60px;
 </style>
 </head>
 	
-<body>	
+<body id="body">	
 <div id="topbar">
 <center>
 	<div id="time">00:00</div>
@@ -142,7 +142,7 @@ width: 60px;
 
 <div id="container">
 <input id="ttext"></input>
-<button id="savetxt">sauvegarder</button>
+<button id="savetxt" onclick="savep()">sauvegarder</button>
 </div>
 
 </body>
@@ -194,6 +194,9 @@ function toggleFullScreen() {
       cancelFullScreen.call(doc);
     }
   }
-
+function savep(){
+taille = ttext.value
+body.fontSize= taille + "%";
+}
 </script>
 </html>
